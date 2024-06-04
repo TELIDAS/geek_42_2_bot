@@ -3,6 +3,7 @@ from aiogram.filters import Command
 from config import bot
 from database.a_db import AsyncDatabase
 from database import sql_queries
+from keyboards.start import start_menu_keyboard
 
 router = Router()
 
@@ -24,5 +25,8 @@ async def start_menu(message: types.Message,
     )
     await bot.send_message(
         chat_id=message.chat.id,
-        text="hello"
+        text=f"Hello {message.from_user.first_name}\n"
+             f"Im 42-2-bot, i can register u in profile mode\n"
+             f"new features coming soon...",
+        reply_markup=await start_menu_keyboard()
     )
