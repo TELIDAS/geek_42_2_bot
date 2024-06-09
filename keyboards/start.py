@@ -9,7 +9,17 @@ async def start_menu_keyboard():
         text="Registration 🔥",
         callback_data="registration"
     )
+    profile_button = InlineKeyboardButton(
+        text="My Profile 🧑🏻‍💻",
+        callback_data="my_profile"
+    )
+    like_button = InlineKeyboardButton(
+        text="View Profiles 🤑",
+        callback_data="all_profiles"
+    )
     markup = InlineKeyboardMarkup(inline_keyboard=[
         [registration_button],
+        [profile_button],
+        [like_button],
     ])
     return markup
