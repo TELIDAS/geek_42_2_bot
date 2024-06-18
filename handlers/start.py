@@ -2,12 +2,14 @@ import sqlite3
 
 from aiogram import Router, types
 from aiogram.filters import Command
+from aiogram.types import CallbackQuery
 from aiogram.utils.deep_linking import create_start_link
 
 from config import bot
 from database.a_db import AsyncDatabase
 from database import sql_queries
 from keyboards.start import start_menu_keyboard
+from scraper.news_scraper import NewsScraper
 
 router = Router()
 
@@ -82,3 +84,15 @@ async def process_reference_link(token, message, db=AsyncDatabase()):
         )
     except sqlite3.IntegrityError:
         pass
+
+
+@router.callback_query(lambda call: call.data == 'news')
+async def news_call(call: CallbackQuery):
+    scraper = NewsScraper()
+    data = scraper.scrape_data()
+    print(data)
+    for news in data:
+        await bot.send_message(
+            chat_id=call.from_user.id,
+            text="https://www.prnewswire.com" + news
+        )
