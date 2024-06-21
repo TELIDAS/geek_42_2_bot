@@ -17,7 +17,7 @@ class NewsScraper:
 
     def scrape_data(self):
         response = requests.get(self.URL, headers=self.HEADERS)
-        # print(response.text)
+        print(response.text)
         tree = Selector(text=response.text)
         titles = tree.xpath(self.TITLE_XPATH).getall()
         images = tree.xpath(self.IMG_XPATH).getall()
