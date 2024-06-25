@@ -9,7 +9,7 @@ from config import bot
 from database.a_db import AsyncDatabase
 from database import sql_queries
 from keyboards.start import start_menu_keyboard
-from scraper.news_scraper import NewsScraper
+# from scraper.news_scraper import NewsScraper
 
 router = Router()
 
@@ -86,13 +86,13 @@ async def process_reference_link(token, message, db=AsyncDatabase()):
         pass
 
 
-@router.callback_query(lambda call: call.data == 'news')
-async def news_call(call: CallbackQuery):
-    scraper = NewsScraper()
-    data = scraper.scrape_data()
-    print(data)
-    for news in data:
-        await bot.send_message(
-            chat_id=call.from_user.id,
-            text="https://www.prnewswire.com" + news
-        )
+# @router.callback_query(lambda call: call.data == 'news')
+# async def news_call(call: CallbackQuery):
+#     scraper = NewsScraper()
+#     data = scraper.scrape_data()
+#     print(data)
+#     for news in data:
+#         await bot.send_message(
+#             chat_id=call.from_user.id,
+#             text="https://www.prnewswire.com" + news
+#         )
